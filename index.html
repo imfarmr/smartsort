@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartSort - Adaptive Sorting Algorithm</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="logo">SmartSort</span>
+                <span class="tagline">Adaptive Sorting</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#documentation" class="nav-link">Documentation</a></li>
+                <li><a href="#demo" class="nav-link">Demo</a></li>
+                <li><a href="#usage" class="nav-link">Usage</a></li>
+                <li><a href="#performance" class="nav-link">Performance</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">SmartSort</h1>
+                    <p class="hero-subtitle">An Adaptive Sorting Algorithm</p>
+                    <p class="hero-description">
+                        Dynamically analyzes input characteristics and switches between sorting strategies 
+                        (InsertionSort, MergeSort, RadixSort) mid-execution for optimal performance.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-value">3</span>
+                            <span class="stat-label">Algorithms</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">32</span>
+                            <span class="stat-label">Tests Passed</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">1,450+</span>
+                            <span class="stat-label">Lines of Code</span>
+                        </div>
+                    </div>
+                    <div class="hero-actions">
+                        <a href="#demo" class="btn btn-primary">Try Demo</a>
+                        <a href="#documentation" class="btn btn-secondary">Documentation</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Input Analysis</h3>
+                        <p>Analyzes 5 data characteristics: presortedness, range density, distribution type, duplicates, and range bounds.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3>Dynamic Switching</h3>
+                        <p>Switches between InsertionSort, MergeSort, and RadixSort mid-execution based on data patterns.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Optimized Performance</h3>
+                        <p>O(n) for nearly sorted data, O(d·n) for dense ranges, O(n log n) for random data.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3>Statistics Tracking</h3>
+                        <p>Detailed metrics including comparisons, swaps, execution time, and strategy switches.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">✅</div>
+                        <h3>Comprehensive Testing</h3>
+                        <p>32 unit tests covering correctness, edge cases, strategy selection, and performance.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>Well Documented</h3>
+                        <p>Complete documentation with usage guides, examples, and architectural explanations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="documentation" class="documentation">
+            <div class="container">
+                <h2 class="section-title">Documentation</h2>
+                <div class="doc-tabs">
+                    <button class="doc-tab active" data-tab="overview">Overview</button>
+                    <button class="doc-tab" data-tab="quickstart">Quick Start</button>
+                    <button class="doc-tab" data-tab="api">API Reference</button>
+                    <button class="doc-tab" data-tab="algorithms">Algorithms</button>
+                    <button class="doc-tab" data-tab="examples">Examples</button>
+                </div>
+                <div class="doc-content">
+                    <div id="overview" class="doc-panel active">
+                        <h3>Project Overview</h3>
+                        <p>SmartSort is an adaptive sorting algorithm that dynamically analyzes input characteristics and switches between different sorting strategies mid-execution.</p>
+                        
+                        <h4>Algorithm Selection Logic</h4>
+                        <div class="code-block">
+                            <pre><code>IF size ≤ 20:
+    → InsertionSort (efficient for small arrays)
+ELSE IF presortedness ≥ 0.7:
+    → InsertionSort (nearly sorted data)
+ELSE IF range_density ≥ 0.01 AND range < size×10 AND all_positive:
+    → RadixSort (dense integer ranges)
+ELSE:
+    → MergeSort (general purpose)</code></pre>
+                        </div>
+
+                        <h4>Key Components</h4>
+                        <ul>
+                            <li><strong>InputCharacteristics</strong>: Analyzes data patterns</li>
+                            <li><strong>SmartSort</strong>: Main adaptive sorting engine</li>
+                            <li><strong>InsertionSort</strong>: O(n²) worst, O(n) best</li>
+                            <li><strong>MergeSort</strong>: O(n log n) guaranteed</li>
+                            <li><strong>RadixSort</strong>: O(d·n) for dense ranges</li>
+                        </ul>
+                    </div>
+
+                    <div id="quickstart" class="doc-panel">
+                        <h3>Quick Start</h3>
+                        
+                        <h4>Basic Usage</h4>
+                        <div class="code-block">
+                            <pre><code>from smart_sort import SmartSort
+
+data = [64, 34, 25, 12, 22, 11, 90]
+sorter = SmartSort()
+sorted_data = sorter.sort(data)
+print(sorted_data)</code></pre>
+                        </div>
+
+                        <h4>With Verbose Output</h4>
+                        <div class="code-block">
+                            <pre><code>sorter = SmartSort(verbose=True)
+sorted_data = sorter.sort(data)</code></pre>
+                        </div>
+
+                        <h4>Get Statistics</h4>
+                        <div class="code-block">
+                            <pre><code>stats = sorter.get_stats()
+print(f"Time: {stats['execution_time']*1000:.4f} ms")
+print(f"Comparisons: {stats['comparisons']}")
+print(f"Swaps: {stats['swaps']}")</code></pre>
+                        </div>
+
+                        <h4>Running Examples</h4>
+                        <div class="code-block">
+                            <pre><code># Run demo
+python smart_sort.py
+
+# Run tests
+python test_smart_sort.py
+
+# Benchmark
+python benchmark_smart_sort.py
+
+# Visualize
+python visualize_smart_sort.py</code></pre>
+                        </div>
+                    </div>
+
+                    <div id="api" class="doc-panel">
+                        <h3>API Reference</h3>
+                        
+                        <h4>SmartSort Class</h4>
+                        <div class="api-method">
+                            <div class="method-signature">
+                                <code>SmartSort(verbose=False)</code>
+                            </div>
+                            <p>Initialize SmartSort with optional verbose mode.</p>
+                            <p><strong>Parameters:</strong></p>
+                            <ul>
+                                <li><code>verbose</code> (bool): Enable detailed output</li>
+                            </ul>
+                        </div>
+
+                        <div class="api-method">
+                            <div class="method-signature">
+                                <code>sort(data: List[int]) → List[int]</code>
+                            </div>
+                            <p>Sort the input array adaptively.</p>
+                            <p><strong>Parameters:</strong></p>
+                            <ul>
+                                <li><code>data</code> (List[int]): Array to sort</li>
+                            </ul>
+                            <p><strong>Returns:</strong> Sorted array (new copy)</p>
+                        </div>
+
+                        <div class="api-method">
+                            <div class="method-signature">
+                                <code>get_stats() → Dict</code>
+                            </div>
+                            <p>Get performance statistics from last sort.</p>
+                            <p><strong>Returns:</strong> Dictionary with keys:</p>
+                            <ul>
+                                <li><code>comparisons</code>: Number of comparisons</li>
+                                <li><code>swaps</code>: Number of swaps</li>
+                                <li><code>execution_time</code>: Time in seconds</li>
+                                <li><code>strategy_switches</code>: List of strategy changes</li>
+                            </ul>
+                        </div>
+
+                        <h4>InputCharacteristics Class</h4>
+                        <div class="api-method">
+                            <div class="method-signature">
+                                <code>InputCharacteristics(data: List[int])</code>
+                            </div>
+                            <p>Analyze input data characteristics.</p>
+                            <p><strong>Attributes:</strong></p>
+                            <ul>
+                                <li><code>presortedness</code>: 0.0 (reverse) to 1.0 (sorted)</li>
+                                <li><code>range_density</code>: 0.0 (sparse) to 1.0 (dense)</li>
+                                <li><code>distribution_type</code>: uniform, normal, skewed</li>
+                                <li><code>has_duplicates</code>: Boolean</li>
+                                <li><code>data_range</code>: (min, max) tuple</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="algorithms" class="doc-panel">
+                        <h3>Sorting Algorithms</h3>
+                        
+                        <div class="algorithm-card">
+                            <h4>InsertionSort</h4>
+                            <p><strong>Used for:</strong> Small arrays (≤20 elements), nearly sorted data (≥70% presorted)</p>
+                            <p><strong>Time Complexity:</strong> O(n²) worst case, O(n) best case</p>
+                            <p><strong>Space Complexity:</strong> O(1)</p>
+                            <p><strong>Best for:</strong> Nearly sorted data, small datasets</p>
+                        </div>
+
+                        <div class="algorithm-card">
+                            <h4>MergeSort</h4>
+                            <p><strong>Used for:</strong> Large random arrays, general-purpose sorting</p>
+                            <p><strong>Time Complexity:</strong> O(n log n) guaranteed</p>
+                            <p><strong>Space Complexity:</strong> O(n)</p>
+                            <p><strong>Best for:</strong> Random data, guaranteed performance</p>
+                        </div>
+
+                        <div class="algorithm-card">
+                            <h4>RadixSort</h4>
+                            <p><strong>Used for:</strong> Dense integer ranges with good range density</p>
+                            <p><strong>Time Complexity:</strong> O(d·n) where d is number of digits</p>
+                            <p><strong>Space Complexity:</strong> O(n + k)</p>
+                            <p><strong>Best for:</strong> Dense non-negative integer ranges</p>
+                        </div>
+                    </div>
+
+                    <div id="examples" class="doc-panel">
+                        <h3>Usage Examples</h3>
+                        
+                        <h4>Example 1: Nearly Sorted Data</h4>
+                        <div class="code-block">
+                            <pre><code>data = list(range(1, 101))
+for _ in range(5):
+    i, j = random.randint(0, 99), random.randint(0, 99)
+    data[i], data[j] = data[j], data[i]
+
+sorter = SmartSort(verbose=True)
+result = sorter.sort(data)
+
+# Expected: InsertionSort selected, O(n) performance</code></pre>
+                        </div>
+
+                        <h4>Example 2: Dense Integer Range</h4>
+                        <div class="code-block">
+                            <pre><code>ages = [random.randint(0, 120) for _ in range(200)]
+
+sorter = SmartSort()
+sorted_ages = sorter.sort(ages)
+
+# Expected: RadixSort selected for dense range</code></pre>
+                        </div>
+
+                        <h4>Example 3: Random Data</h4>
+                        <div class="code-block">
+                            <pre><code>data = [random.randint(1, 100000) for _ in range(1000)]
+
+sorter = SmartSort()
+result = sorter.sort(data)
+
+# Expected: MergeSort with InsertionSort for small segments</code></pre>
+                        </div>
+
+                        <h4>Example 4: Analyze Before Sorting</h4>
+                        <div class="code-block">
+                            <pre><code>from smart_sort import InputCharacteristics
+
+chars = InputCharacteristics(data)
+print(f"Presortedness: {chars.presortedness:.2%}")
+print(f"Range Density: {chars.range_density:.2%}")
+print(f"Distribution: {chars.distribution_type}")</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="demo" class="demo">
+            <div class="container">
+                <h2 class="section-title">Interactive Demo</h2>
+                <div class="demo-container">
+                    <div class="demo-controls">
+                        <div class="control-group">
+                            <label for="dataType">Data Type:</label>
+                            <select id="dataType">
+                                <option value="random">Random</option>
+                                <option value="sorted">Sorted</option>
+                                <option value="reverse">Reverse Sorted</option>
+                                <option value="nearlySorted">Nearly Sorted</option>
+                                <option value="denseRange">Dense Range</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="arraySize">Array Size: <span id="sizeValue">20</span></label>
+                            <input type="range" id="arraySize" min="5" max="50" value="20">
+                        </div>
+                        <button id="generateBtn" class="btn btn-primary">Generate & Sort</button>
+                    </div>
+                    
+                    <div class="demo-output">
+                        <div class="output-section">
+                            <h4>Input Array</h4>
+                            <div id="inputArray" class="array-display"></div>
+                        </div>
+                        
+                        <div class="output-section">
+                            <h4>Analysis</h4>
+                            <div id="analysis" class="analysis-display"></div>
+                        </div>
+                        
+                        <div class="output-section">
+                            <h4>Sorted Array</h4>
+                            <div id="sortedArray" class="array-display"></div>
+                        </div>
+                        
+                        <div class="output-section">
+                            <h4>Statistics</h4>
+                            <div id="statistics" class="stats-display"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="usage" class="usage">
+            <div class="container">
+                <h2 class="section-title">Installation & Usage</h2>
+                <div class="usage-grid">
+                    <div class="usage-card">
+                        <h3>1. Clone Repository</h3>
+                        <div class="code-block">
+                            <pre><code>cd c:\Users\hp\Desktop\pailasim</code></pre>
+                        </div>
+                    </div>
+                    <div class="usage-card">
+                        <h3>2. Run Demo</h3>
+                        <div class="code-block">
+                            <pre><code>python smart_sort.py</code></pre>
+                        </div>
+                    </div>
+                    <div class="usage-card">
+                        <h3>3. Run Tests</h3>
+                        <div class="code-block">
+                            <pre><code>python test_smart_sort.py</code></pre>
+                        </div>
+                    </div>
+                    <div class="usage-card">
+                        <h3>4. Benchmark</h3>
+                        <div class="code-block">
+                            <pre><code>python benchmark_smart_sort.py</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="performance" class="performance">
+            <div class="container">
+                <h2 class="section-title">Performance Benchmarks</h2>
+                <div class="performance-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data Type</th>
+                                <th>Size</th>
+                                <th>Strategy</th>
+                                <th>Time</th>
+                                <th>Complexity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nearly Sorted</td>
+                                <td>100</td>
+                                <td>InsertionSort</td>
+                                <td>~2ms</td>
+                                <td>O(n)</td>
+                            </tr>
+                            <tr>
+                                <td>Dense Range</td>
+                                <td>200</td>
+                                <td>RadixSort</td>
+                                <td>~8ms</td>
+                                <td>O(d·n)</td>
+                            </tr>
+                            <tr>
+                                <td>Random</td>
+                                <td>500</td>
+                                <td>MergeSort</td>
+                                <td>~48ms</td>
+                                <td>O(n log n)</td>
+                            </tr>
+                            <tr>
+                                <td>Large Random</td>
+                                <td>1000</td>
+                                <td>MergeSort</td>
+                                <td>~165ms</td>
+                                <td>O(n log n)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="test-results">
+                    <h3>Test Results</h3>
+                    <div class="test-summary">
+                        <div class="test-stat">
+                            <span class="test-number">32/32</span>
+                            <span class="test-label">Tests Passed</span>
+                        </div>
+                        <div class="test-stat">
+                            <span class="test-number">100%</span>
+                            <span class="test-label">Success Rate</span>
+                        </div>
+                        <div class="test-stat">
+                            <span class="test-number">0.869s</span>
+                            <span class="test-label">Execution Time</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>SmartSort</h4>
+                    <p>An adaptive sorting algorithm that dynamically switches strategies for optimal performance.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="#documentation">Overview</a></li>
+                        <li><a href="#documentation">Quick Start</a></li>
+                        <li><a href="#documentation">API Reference</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#demo">Demo</a></li>
+                        <li><a href="#performance">Benchmarks</a></li>
+                        <li><a href="#usage">Usage Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SmartSort Project. Educational Use.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
